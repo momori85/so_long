@@ -28,7 +28,7 @@ void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
 int		ft_strchr(char *s, int c);
 char	*ft_strjoin(char *str, char *src, int len);
-size_t	ft_strlen(char *s);
+int	ft_strlen(char *s);
 size_t	ft_strlcpy(char *dst, char *src, size_t size);
 
 #endif

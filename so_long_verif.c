@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-static int	ft_verif_condition(int fd, char *str, size_t max, size_t count)
+static int	ft_verif_condition(int fd, char *str, int max, int count)
 {
 	if (str[0] != '1' || str[max - 2] != '1')
 	{
@@ -35,9 +35,9 @@ static int	ft_verif_condition(int fd, char *str, size_t max, size_t count)
 	return (1);
 }
 
-static char	*ft_verif_first_last(char *str, size_t max)
+static char	*ft_verif_first_last(char *str, int max)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (str[i] && i < max)
@@ -50,38 +50,35 @@ static char	*ft_verif_first_last(char *str, size_t max)
 	while ((i) >= (i - max - 1) && str[i])
 	{
 		if (str[i] != '1')
-		{
-			printf("[%zu]", i);
 			return (NULL);
-		}
 		i--;
 	}
 	return (str);
 }
 
-char	*ft_verif(size_t count)
+int	ft_verif(int count, t_vars *vars)
 {
 	int		fd;
 	char	*str;
-	char	*map;
-	size_t	max;
+	int	max;
 
 	fd = open("so_long.ber", O_RDONLY);
 	str = get_next_line(fd);
 	if (str == NULL)
-		return (NULL);
+		return (0);
 	max = ft_strlen(str);
-	map = ft_calloc(1, sizeof(char));
+	vars->len = max - 1;
+	vars->map = ft_calloc(1, sizeof(char));
 	while (str != NULL)
 	{
 		if (ft_verif_condition(fd, str, max, count) == 0)
-			return (NULL);
+			return (0);
 		count++;
-		map = ft_strjoin(map, str, max - 1);
+		vars->map = ft_strjoin(vars->map, str, max - 1);
 		free(str);
 		str = get_next_line(fd);
 	}
 	free(str);
-	map = ft_verif_first_last(map, max - 2);
-	return (map);
+	vars->map = ft_verif_first_last(vars->map, max - 2);
+	return(1);
 }

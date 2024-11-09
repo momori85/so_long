@@ -13,36 +13,51 @@
 #include "so_long.h"
 #include <stdio.h>
 
-char	*so_long(void)
+char	*ft_strdup(char *s)
 {
-	size_t	count;
-	size_t	size;
-	char	*map;
+	int		i;
+	int	j;
+	char		*str;
+
+	i = ft_strlen(s);
+	j = 0;
+	str = malloc(sizeof (char) * (i + 1));
+	if (str == NULL)
+		return (NULL);
+	while (j < i)
+	{
+		str[j] = s[j];
+		j++;
+	}
+	str[j] = '\0';
+	return (str);
+}
+
+int	so_long(void)
+{
+	int	count;
+	t_vars	vars;
 
 	count = 0;
-	map = ft_verif(count);
-	if (map == NULL)
+	if (ft_verif(count, &vars) == 0)
 	{
-		free(map);
+		free(vars.map);
 		write(1, "error, invalid or missing map", 30);
 		return (0);
 	}
-	if (ft_init_backtrack(map) == 0)
+	if (ft_init_backtrack(&vars) == 0)
 	{
-		free(map);
+		free(vars.map);
 		write(1, "error, missing path", 19);
 		return (0);
 	}
-	
-	return (map);
+	printf("%s\n", vars.map);
+	free(vars.map);
+	return (1);
 }
 
 int	main(void)
 {
-	char	*map;
-
-	map = so_long();
-	printf("%s", map);
-	free(map);
+	so_long();
 	return (1);
 }

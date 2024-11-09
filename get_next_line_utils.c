@@ -75,7 +75,7 @@ char	*ft_strjoin(char *str, char *src, int len)
 	return (new);
 }
 
-size_t	ft_strlen(char *s)
+int	ft_strlen(char *s)
 {
 	int	i;
 

@@ -32,12 +32,10 @@ int	ft_verif_back(char *map, int pos)
 	return (0);
 }
 
-int	ft_backtracking(char *map, int pos, int len)
+int	ft_backtracking(char *map, int pos, size_t len)
 {
-	//printf("[%d]", len);
 	if (map[pos] == 'E')
 	{
-		printf("[%s]", map);
 		return (1);
 	}
 	else if (map[pos] != '1' && map[pos] != '*')
@@ -45,45 +43,46 @@ int	ft_backtracking(char *map, int pos, int len)
 		map[pos] = '*';
 		if (ft_verif_back(map, pos + 1)) // Droite
 		{
-			//write(1, "a", 1); 
 			if (ft_backtracking(map, pos + 1, len))
 				return (1);
 		}
 		if (ft_verif_back(map, pos - 1)) //Gauche
 		{
-			//write(1, "b", 1);
 			if (ft_backtracking(map, pos - 1, len))
 				return (1);
 		}
 		if (ft_verif_back(map, pos + len)) //Bas
 		{
-			//write(1, "c", 1);
 			if (ft_backtracking(map, pos + len, len))
 				return (1);
 		}
 		if (ft_verif_back(map, pos - len)) //Haut
 		{
-			//write(1, "d", 1);
 			if (ft_backtracking(map, pos - len, len))
 				return (1);
 		}
 		map[pos] = '0';
 	}
-	//write(1, "\n", 1);
 	return (0);
 }
 
-int	ft_init_backtrack(char *map)
+int	ft_init_backtrack(t_vars *vars)
 {
 	int	i;
-	int	a;
+	char	*tmp;
 	
-	if (!seekfor_cpoint(map, 'E'))
+	if (!seekfor_cpoint(vars->map, 'E'))
 		return (0);		
-	i = seekfor_cpoint(map, 'P');
+	i = seekfor_cpoint(vars->map, 'P');
 	if (!i)
 		return (0);
-	if (ft_backtracking(map, i, 11))// probleme longueur
-		return (1);
-	return (0);
+	tmp = ft_strdup(vars->map);
+	if (ft_backtracking(tmp, i, vars->len) == 0)
+	{
+		free(tmp);
+		free(vars->map);
+		return (0);
+	}
+	free(tmp);
+	return (1);
 }
