@@ -51,6 +51,11 @@ int	so_long(void)
 		write(1, "error, missing path", 19);
 		return (0);
 	}
+	if (ft_graph_init(&vars) == 0)
+	{
+		free(vars.map);
+		return (0);
+	}
 	printf("%s\n", vars.map);
 	free(vars.map);
 	return (1);

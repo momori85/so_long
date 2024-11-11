@@ -10,4 +10,17 @@ typedef struct s_vars
 	char	*map;
 }	t_vars;
 
+typedef struct s_graph
+{
+	void	*window;
+	void	*mlx;
+}	t_graph;
+
+typedef struct s_img_map
+{
+	void	*img_wall;
+	void	*img_path;
+}	t_img_map;
+
+
 #endif
