@@ -50,7 +50,7 @@ void addCollectibles(int width, int height, char map[height][width], int collect
         int x = rand() % (height - 2) + 1;
         int y = rand() % (width - 2) + 1;
         if (map[x][y] == '0') { // Place uniquement sur une case libre
-            map[x][y] = 'c';
+            map[x][y] = 'C';
             placed++;
         }
     }
@@ -65,7 +65,7 @@ void saveMapToFile(int width, int height, char map[height][width], const char *f
     }
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
-            fprintf(file, "%c ", map[i][j]);
+            fprintf(file, "%c", map[i][j]);
         }
         fprintf(file, "\n");
     }
@@ -73,10 +73,10 @@ void saveMapToFile(int width, int height, char map[height][width], const char *f
 }
 
 int main() {
-    int width = 50;  // Largeur de la map
-    int height = 30; // Hauteur de la map
+    int width = 15;  // Largeur de la map
+    int height = 5; // Hauteur de la map
     float openRatio = 0.7; // Ratio de cases ouvertes (50%)
-    int collectibleCount = 10; // Nombre de collectibles
+    int collectibleCount = 5; // Nombre de collectibles
 
     char map[height][width];
     int startX = 1, startY = 1;              // Position du départ
@@ -92,16 +92,16 @@ int main() {
     carveGuaranteedPath(width, height, map, startX, startY, endX, endY);
 
     // Place le départ et la sortie
-    map[startX][startY] = 'd';
-    map[endX][endY] = 'e';
+    map[startX][startY] = 'P';
+    map[endX][endY] = 'E';
 
     // Ajoute des collectibles
     addCollectibles(width, height, map, collectibleCount);
 
     // Sauvegarde la map dans un fichier
-    saveMapToFile(width, height, map, "map.ber");
+    saveMapToFile(width, height, map, "so_long.ber");
 
-    printf("Map générée et sauvegardée dans 'map.ber'.\n");
+    printf("Map générée et sauvegardée dans 'so_long.ber'.\n");
     return 0;
 }
 

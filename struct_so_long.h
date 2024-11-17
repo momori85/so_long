@@ -8,6 +8,9 @@ typedef struct s_vars
 {
 	int	len;
 	char	*map;
+	int x;
+	int y;
+	int start;
 }	t_vars;
 
 typedef struct s_graph
@@ -20,6 +23,7 @@ typedef struct s_img_map
 {
 	void	*img_wall;
 	void	*img_path;
+	void	*img_c;
 }	t_img_map;
 
 

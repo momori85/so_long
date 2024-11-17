@@ -80,7 +80,6 @@ int	ft_init_backtrack(t_vars *vars)
 	if (ft_backtracking(tmp, i, vars->len) == 0)
 	{
 		free(tmp);
-		free(vars->map);
 		return (0);
 	}
 	free(tmp);

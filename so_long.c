@@ -45,12 +45,12 @@ int	so_long(void)
 		write(1, "error, invalid or missing map", 30);
 		return (0);
 	}
-	if (ft_init_backtrack(&vars) == 0)
+	/*if (ft_init_backtrack(&vars) == 0)
 	{
 		free(vars.map);
 		write(1, "error, missing path", 19);
 		return (0);
-	}
+	}*/
 	if (ft_graph_init(&vars) == 0)
 	{
 		free(vars.map);
@@ -64,5 +64,4 @@ int	so_long(void)
 int	main(void)
 {
 	so_long();
-	return (1);
 }
